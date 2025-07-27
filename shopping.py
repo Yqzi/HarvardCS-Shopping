@@ -59,7 +59,61 @@ def load_data(filename):
     labels should be the corresponding list of labels, where each label
     is 1 if Revenue is true, and 0 otherwise.
     """
-    raise NotImplementedError
+    evidence = []
+    label = []
+
+    # converters in respect to each item in row - label
+    converters = [
+        int,
+        float,
+        int,
+        float,
+        int,
+        float,
+        float,
+        float,
+        float,
+        float,
+        str,
+        int,
+        int,
+        int,
+        int,
+        str,
+        str 
+    ]
+
+    months = {
+        'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'June': 5,
+        'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
+    }
+
+    with open(filename) as file:
+        spamreader = csv.reader(file)
+        # skip header
+        next(spamreader)
+        for row in spamreader:
+            temp_evidence_row = []
+            for i, convert in enumerate(converters):
+                v = row[i]
+                # convert from months to int
+                if i == 10:
+                    v = months[v]
+                # convert visitor string to int
+                elif i == 15:
+                    v = 1 if v == 'Returning_Visitor' else 0
+                # convert weekend string to int
+                elif i == 16:
+                    v = 1 if v == "True" else 0
+                else:
+                    v = convert(v)
+                temp_evidence_row.append(v)
+            evidence.append(temp_evidence_row)
+            label.append(1 if row[-1] == 'TRUE' else 0)
+    
+    print(evidence[0])
+    print(label[0])
+    
 
 
 def train_model(evidence, labels):
