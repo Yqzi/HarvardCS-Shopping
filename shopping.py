@@ -111,10 +111,6 @@ def load_data(filename):
             evidence.append(temp_evidence_row)
             label.append(1 if row[-1] == 'TRUE' else 0)
     
-    print(evidence[0])
-    print(label[0])
-    
-
 
 def train_model(evidence, labels):
     """
