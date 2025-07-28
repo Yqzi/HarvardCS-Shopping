@@ -80,7 +80,7 @@ def load_data(filename):
         int,
         int,
         str,
-        str 
+        str, 
     ]
 
     months = {
