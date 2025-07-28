@@ -60,7 +60,7 @@ def load_data(filename):
     is 1 if Revenue is true, and 0 otherwise.
     """
     evidence = []
-    label = []
+    labels = []
 
     # converters in respect to each item in row - label
     converters = [
@@ -109,7 +109,9 @@ def load_data(filename):
                     v = convert(v)
                 temp_evidence_row.append(v)
             evidence.append(temp_evidence_row)
-            label.append(1 if row[-1] == 'TRUE' else 0)
+            labels.append(1 if row[-1] == 'TRUE' else 0)
+    
+    return (evidence, labels)
     
 
 def train_model(evidence, labels):
